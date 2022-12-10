@@ -53,7 +53,7 @@ function isEmpty() {
 }
 
 button.addEventListener("click", isEmpty);
-button.addEventListener("click", showRestaurant);
+button.addEventListener("click", showRestaurant); 
 
 //let radius = 10000
 //let lat = 50.3776
