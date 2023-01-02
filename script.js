@@ -3,8 +3,12 @@ const radiusInput = document.getElementById("radius");
 const latInput = document.getElementById("lat");
 const longInput = document.getElementById("long");
 
+
 function showRestaurant() {
-  let xhr = new XMLHttpRequest();
+
+
+
+  // let xhr = new XMLHttpRequest();
 
   let radius = radiusInput.value;
   let lat = latInput.value;
@@ -12,31 +16,61 @@ function showRestaurant() {
 
   let url = `http://dev.findit.com.pl/api/gastronomy?radius=${radius}&lat=${lat}&long=${long}`;
 
-  xhr.open("GET", url, true);
+  // fetch(url)
+  //   .then(response => console.log(response))
 
-  xhr.onload = function () {
-    if (xhr.status == 200) {
-      console.log("success");
-      let restaurants = JSON.parse(this.response);
-      console.log(restaurants);
+
+  fetch(url)
+    .then((response) => {
+      console.log(response)
+      return response.json()
+    })
+    .then((restaurants) => {
+      
+      console.log("success")
+      console.log(restaurants)
 
       restaurants.forEach((element) => {
-        const restaurantName = document.createElement("div");
-        restaurantName.innerHTML = element.name;
-        document.getElementById("name").appendChild(restaurantName);
-      });
+          const restaurantName = document.createElement("div");
+          restaurantName.innerHTML = element.name;
+          document.getElementById("name").appendChild(restaurantName);
+        });
 
       restaurants.forEach((element) => {
-        const type = document.createElement("div");
-        type.innerHTML = element.type;
-        document.getElementById("code").appendChild(type);
-      });
-    } else if (xhr.status == 400) {
-      console.log("zjebales");
-    }
-  };
+          const type = document.createElement("div");
+          type.innerHTML = element.type;
+          document.getElementById("code").appendChild(type);
+        })
+    })
+    .catch(error => console.log("Error ", error))
 
-  xhr.send();
+
+//   xhr.open("GET", url, true);
+
+//   xhr.onload = function () {
+//     if (xhr.status == 200) {
+//       console.log("success");
+//       let restaurants = JSON.parse(this.response);
+//       console.log(restaurants);
+
+//       restaurants.forEach((element) => {
+//         const restaurantName = document.createElement("div");
+//         restaurantName.innerHTML = element.name;
+//         document.getElementById("name").appendChild(restaurantName);
+//       });
+
+//       restaurants.forEach((element) => {
+//         const type = document.createElement("div");
+//         type.innerHTML = element.type;
+//         document.getElementById("code").appendChild(type);
+//       });
+//     } else if (xhr.status == 400) {
+//       console.log("zjebales");
+//     }
+//   };
+
+//   xhr.send();
+// 
 }
 
 const codeBox = document.getElementById("code");
