@@ -3,6 +3,7 @@ const radiusInput = document.getElementById("radius");
 const latInput = document.getElementById("lat");
 const longInput = document.getElementById("long");
 
+//Function that should GET the restaurant values --> push into a JSON and put it into the HTML document
 
 function showRestaurant() {
 
