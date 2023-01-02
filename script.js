@@ -22,8 +22,12 @@ function showRestaurant() {
 
   fetch(url)
     .then((response) => {
-      console.log(response)
-      return response.json()
+      if (response.ok) {
+        console.log(response)
+        return response.json()
+      } else {
+        return Promise.reject(`Http error: ${response.status}`)
+      }
     })
     .then((restaurants) => {
       
